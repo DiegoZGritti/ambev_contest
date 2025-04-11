@@ -28,14 +28,14 @@ O projeto segue os princípios da **Arquitetura Hexagonal** (Ports and Adapters)
 |                                                              |
 |  +------------------+        +---------------------------+   |
 |  |                  |        |                           |   |
-|  |     Domínio      |        |         Aplicação        |   |
-|  |                  |        |                          |   |
-|  | - Entidades      |◄-------|  - Casos de Uso         |   |
-|  | - Regras         |        |  - Serviços             |   |
-|  | - Aggregates     |        |  - Orquestração         |   |
-|  |                  |        |                          |   |
+|  |     Domínio      |        |         Aplicação         |   |
+|  |                  |        |                           |   |
+|  | - Entidades      |◄-------|  - Casos de Uso           |   |
+|  | - Regras         |        |  - Serviços               |   |
+|  | - Aggregates     |        |  - Orquestração           |   |
+|  |                  |        |                           |   |
 |  +------------------+        +---------------------------+   |
-|        △  △                          △          |           |
+|        △  △                        △           |           |
 |        |  |                          |          |           |
 |        |  |                          |          ▼           |
 |        |  |                          |  +------------------+|
