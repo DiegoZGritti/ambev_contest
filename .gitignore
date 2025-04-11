@@ -31,3 +31,51 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Certificados e chaves ###
+*.jks
+*.p12
+*.pem
+*.crt
+*.key
+*.keystore
+*.truststore
+**/certs/
+**/certificates/
+**/keys/
+
+### Arquivos de configuração com credenciais ###
+**/application-*.yml
+**/application-*.properties
+!**/application-test.yml
+!**/application-test.properties
+**/bootstrap-*.yml
+**/bootstrap-*.properties
+**/*.env
+**/.env*
+**/credentials.json
+**/credentials.yml
+**/credentials.properties
+**/secrets.yml
+**/secrets.properties
+
+### Logs ###
+logs/
+*.log
+
+### Arquivos temporários ###
+*.tmp
+*.temp
+tmp/
+temp/
+
+### Docker ###
+.docker/data/
+
+### Relatórios de cobertura ###
+jacoco.exec
+
+### LocalStack ###
+.localstack/
+volume/
+/localstack/cache
