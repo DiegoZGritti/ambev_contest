@@ -1,0 +1,80 @@
+spring:
+  application:
+    name: ambev-order-service
+  
+  # Configuração do banco H2
+  datasource:
+    url: jdbc:h2:mem:ambev;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: 
+    driverClassName: org.h2.Driver
+  
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: false
+  
+  # Console H2
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+# Adicionando configuração de porta do servidor
+server:
+  port: 8080
+
+# Configurações da aplicação
+app:
+  features:
+    sqs-enabled: false  # Desabilitando SQS temporariamente
+    wiremock-enabled: true
+
+# Configurações AWS para LocalStack
+aws:
+  region: sa-east-1
+  endpoint: http://localhost:4566
+  credentials:
+    access-key: dummy-key
+    secret-key: dummy-secret
+  sqs:
+    queue:
+      order-received: order-received-queue
+      order-processed: order-processed-queue
+    endpoint: http://localhost:4566
+    create-order-queue: create-order-queue
+    validate-order-queue: validate-order-queue
+    process-order-queue: process-order-queue
+
+# Documentação OpenAPI
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+  info:
+    title: API de Pedidos Ambev
+    description: |
+      API para processamento de pedidos com os seguintes fluxos:
+      1. Cliente envia pedido via API
+      2. API verifica duplicidade pelo ID externo
+      3. Pedido é enviado para fila SQS
+      4. Consumidor processa pedido, valida duplicidade novamente
+      5. Pedido é salvo no banco e enviado para Serviço B (WireMock)
+    version: 1.0.0
+
+# Configurações de log
+logging:
+  level:
+    com.contest.ambev: DEBUG
+    org.springframework.web: INFO
+    org.hibernate: INFO
+
+# Configuração do Service B (mockado com WireMock)
+service-b:
+  port: 9090
+  url: http://localhost:9090/service-b/orders
+  description: "Serviço B simulado com WireMock na porta 9090" 
